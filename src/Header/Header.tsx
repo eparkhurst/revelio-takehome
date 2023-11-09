@@ -1,18 +1,31 @@
 import { useNavigate } from 'react-router-dom';
 import './Header.css';
-import { useState } from 'react';
 import { DarkModeToggle } from '../DarkModeToggle/DarkModeToggle';
 
 const Header = ({}) => {
     const navigate = useNavigate();
-    const [isDark, setIsDark] = useState(true);
+    const path = window.location.pathname;
 
+    console.log(path === '/latest');
+    console.log(path);
     return (
         <div className="header">
             <span className="left-header">
-                <h1>Hacker News</h1>
-                <button onClick={() => navigate('/latest')}>latest</button>
-                <button onClick={() => navigate('/starred')}>starred</button>
+                <span className="logo">Y</span>
+                <h1 className="title">Hacker News</h1>
+                <span
+                    className={path === '/latest' ? 'header-nav active' : 'header-nav'}
+                    onClick={() => navigate('/latest')}
+                >
+                    latest
+                </span>
+                |
+                <span
+                    className={path === '/starred' ? 'header-nav active' : 'header-nav'}
+                    onClick={() => navigate('/starred')}
+                >
+                    starred
+                </span>
             </span>
             <span className="right-header">
                 <DarkModeToggle />

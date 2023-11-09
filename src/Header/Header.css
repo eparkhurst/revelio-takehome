@@ -2,8 +2,34 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-left:90px ;
 }
 .left-header {
     display: flex;
     flex-direction: row;
+    align-items: center;
+}
+.header-nav:hover {
+    cursor: pointer;
+}
+.header-nav {
+    font-size: 14px;
+    padding: 0 10px;
+}
+.active {
+    color: #FE7139;
+    font-weight: 700;
+}
+.logo {
+    width: 33px;
+    height: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
+    background-color: #FE7139;
+    margin-right:17px;
+}
+.title {
+    margin-right: 37px;
 }

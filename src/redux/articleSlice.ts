@@ -16,6 +16,7 @@ export type Article = {
     title: string;
     type: string;
     url: string;
+    domain: string;
 };
 
 const initialState: ArticleState = {
@@ -32,7 +33,20 @@ export const fetchArticles = createAsyncThunk('counter/fetchCount', async (amoun
             fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then((response) => response.json()),
         );
     const result = await Promise.all(promises);
-    return result;
+    return result.map((article) => {
+        const regex = /^(https?:\/\/)?([a-zA-Z0-9.-]+)/;
+
+        const match = regex.exec(article.url) || [];
+        if (match) {
+            let domain = match[2];
+            const domainParts = domain.split('.');
+            if (domainParts.length > 2) {
+                domain = domainParts.slice(1).join('.');
+            }
+            article.domain = domain;
+        }
+        return article;
+    });
 });
 
 export const articleSlice = createSlice({
