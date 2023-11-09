@@ -24,30 +24,39 @@ const initialState: ArticleState = {
     articles: [],
 };
 
-export const fetchArticles = createAsyncThunk('counter/fetchCount', async (amount: number) => {
-    const response = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json');
-    const json = await response.json();
-    const promises = json
-        .slice(0, amount)
-        .map((id: string) =>
-            fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then((response) => response.json()),
-        );
-    const result = await Promise.all(promises);
-    return result.map((article) => {
-        const regex = /^(https?:\/\/)?([a-zA-Z0-9.-]+)/;
-
-        const match = regex.exec(article.url) || [];
-        if (match) {
-            let domain = match[2];
-            const domainParts = domain.split('.');
-            if (domainParts.length > 2) {
-                domain = domainParts.slice(1).join('.');
-            }
-            article.domain = domain;
+export const fetchArticles = createAsyncThunk(
+    'counter/fetchCount',
+    async ({ amount = 12, start = 0 }: { amount: number; start?: number }, { getState }) => {
+        let previousArticles: any[] = [];
+        if (start) {
+            const state = getState() as RootState;
+            previousArticles = state.articles.articles;
         }
-        return article;
-    });
-});
+        const response = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json');
+        const json = await response.json();
+        const promises = json
+            .slice(start, start + amount)
+            .map((id: string) =>
+                fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then((response) => response.json()),
+            );
+        const result = await Promise.all(promises);
+        const formattedResults = result.map((article) => {
+            const regex = /^(https?:\/\/)?([a-zA-Z0-9.-]+)/;
+
+            const match = regex.exec(article.url) || [];
+            if (match) {
+                let domain = match[2];
+                const domainParts = domain.split('.');
+                if (domainParts.length > 2) {
+                    domain = domainParts.slice(1).join('.');
+                }
+                article.domain = domain;
+            }
+            return article;
+        });
+        return [...previousArticles, ...formattedResults];
+    },
+);
 
 export const articleSlice = createSlice({
     name: 'article',
@@ -79,5 +88,10 @@ export const articleSlice = createSlice({
 export const { articleItem, unarticleItem } = articleSlice.actions;
 
 export const selectArticles = (state: RootState) => state.articles.articles;
+export const selectFavoriteArticles = (ids: number[]) => (state: RootState) => {
+    return state.articles.articles.filter((article) => {
+        return ids.includes(article.id);
+    });
+};
 
 export default articleSlice.reducer;

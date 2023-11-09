@@ -1,0 +1,23 @@
+.footer {
+    border-top: 2px solid #FE7139;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 90px ;
+    padding-bottom: 20px;
+    flex-shrink: 0;
+}
+
+.footer-nav:hover {
+    cursor: pointer;
+}
+.footer-nav {
+    font-size: 14px;
+    padding: 0 5px;
+}
+
+.footer-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+}

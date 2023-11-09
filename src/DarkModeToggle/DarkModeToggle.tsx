@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { selectDarkMode, upadateDarkMode } from '../redux/userSlice';
+import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
+import Brightness5Icon from '@mui/icons-material/Brightness5';
 
 export const DarkModeToggle = () => {
     const dispatch = useAppDispatch();
@@ -15,8 +17,8 @@ export const DarkModeToggle = () => {
     }, [isDark]);
 
     return (
-        <button onClick={() => dispatch(upadateDarkMode(!isDark))} aria-label="Dark mode toggle">
-            {isDark ? '🔆' : '🌙'}
-        </button>
+        <div onClick={() => dispatch(upadateDarkMode(!isDark))} aria-label="Dark mode toggle">
+            {isDark ? <Brightness5Icon /> : <NightlightRoundIcon />}
+        </div>
     );
 };

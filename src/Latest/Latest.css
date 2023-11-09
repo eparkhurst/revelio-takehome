@@ -2,7 +2,7 @@
     padding: 8px 0;
 }
 .article-list {
-    padding-left: 110px;
+    padding-left: 120px;
 }
 .article-info, .article-domain {
     font-size: 10px;
@@ -22,10 +22,21 @@ a {
     letter-spacing: 0em;
     text-align: left;
  } 
+ .article-info {
+    display: flex;
+    align-items: center;
+ }
  .article-domain {
     padding-left: 10px;
  }
  li {
     color: var(--color-secondary);
     font-family: 'Ubuntu Mono' san-serif;
+ }
+ .save-button {
+    display: flex;
+    align-items: center;
+ }
+ .save-button:hover {
+    cursor: pointer;
  }
