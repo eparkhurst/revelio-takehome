@@ -19,7 +19,8 @@
 }
 .header-nav {
     font-size: 14px;
-    padding: 0 10px;
+    width: 60px;
+    text-align: center;
 }
 .active {
     color: #FE7139;

@@ -1,15 +1,13 @@
-import Header from '../Header/Header';
-import { selectFavoriteArticles } from '../redux/articleSlice';
+import { selectArticles } from '../redux/articleSlice';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { selectFavorites, updateFavorites } from '../redux/userSlice';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
-import Footer from '../Footer/Footer';
 
 const Starred = ({}) => {
     const dispatch = useAppDispatch();
     const favorites = useAppSelector(selectFavorites);
-    const articles = useAppSelector(selectFavoriteArticles(favorites));
+    const articles = useAppSelector(selectArticles).filter((article) => favorites.includes(article.id));
 
     return (
         <>
@@ -17,7 +15,7 @@ const Starred = ({}) => {
                 {articles.map((article) => {
                     return (
                         <li key={article.id} className="article">
-                            <span>
+                            <span className="top-line">
                                 <a className="article-link" href={article.url}>
                                     {article.title}
                                 </a>

@@ -6,8 +6,6 @@ const Header = ({}) => {
     const navigate = useNavigate();
     const path = window.location.pathname;
 
-    console.log(path === '/latest');
-    console.log(path);
     return (
         <div className="header">
             <span className="left-header">
