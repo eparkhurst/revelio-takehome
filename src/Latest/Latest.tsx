@@ -9,21 +9,24 @@ const Latest = ({}) => {
     const articles = useAppSelector(selectArticles);
 
     useEffect(() => {
-        dispatch(fetchArticles(25));
+        dispatch(fetchArticles(12));
     }, []);
 
     return (
         <>
             <Header />
-            <ol>
+            <ol className="article-list">
                 {articles.map((article) => {
                     return (
-                        <div>
-                            <a className="article-link" href={article.url}>
-                                {article.title}
-                            </a>
+                        <li key={article.id} className="article">
+                            <span>
+                                <a className="article-link" href={article.url}>
+                                    {article.title}
+                                </a>
+                                <span className="article-domain">({article.domain})</span>
+                            </span>
                             <div className="article-info">{`${article.score} points by ${article.by} | ${article.descendants} comments`}</div>
-                        </div>
+                        </li>
                     );
                 })}
             </ol>

@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { selectDarkMode, upadateDarkMode } from '../redux/userSlice';
 
 export const DarkModeToggle = () => {
-    const [isDark, setIsDark] = useState(true);
+    const dispatch = useAppDispatch();
+    const isDark = useAppSelector(selectDarkMode);
 
     useEffect(() => {
         if (isDark) {
@@ -12,16 +14,8 @@ export const DarkModeToggle = () => {
         }
     }, [isDark]);
 
-    const systemPrefersDark = useMediaQuery(
-        {
-            query: '(prefers-color-scheme: dark)',
-        },
-        undefined,
-        (isSystemDark: any) => setIsDark(isSystemDark),
-    );
-
     return (
-        <button onClick={() => setIsDark(!isDark)} aria-label="Dark mode toggle">
+        <button onClick={() => dispatch(upadateDarkMode(!isDark))} aria-label="Dark mode toggle">
             {isDark ? '🔆' : '🌙'}
         </button>
     );
