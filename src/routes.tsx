@@ -2,6 +2,7 @@ import Latest from './Latest/Latest';
 import Starred from './Starred/Starred';
 import ErrorPage from './ErrorPage/ErrorPage';
 import Layout from './Layout/Layout';
+import { redirect } from 'react-router-dom';
 
 const routes = [
     {
@@ -17,12 +18,15 @@ const routes = [
                 element: <Starred />,
                 errorElement: <ErrorPage />,
             },
-            {
-                path: '/*',
-                element: <Latest />,
-                errorElement: <ErrorPage />,
-            },
         ],
+    },
+    {
+        path: '/*',
+        element: <></>,
+        loader: async () => {
+            return redirect('/latest');
+        },
+        errorElement: <ErrorPage />,
     },
 ];
 

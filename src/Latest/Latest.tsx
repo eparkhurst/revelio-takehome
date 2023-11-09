@@ -24,7 +24,7 @@ const Latest = ({}) => {
                 {articles.map((article) => {
                     return (
                         <li key={article.id} className="article">
-                            <span>
+                            <span className="top-line">
                                 <a className="article-link" href={article.url}>
                                     {article.title}
                                 </a>
