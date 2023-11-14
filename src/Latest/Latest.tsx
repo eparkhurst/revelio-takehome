@@ -36,9 +36,11 @@ const Latest = ({}) => {
                                 </span>
                                 <span className="save-button" onClick={() => dispatch(updateFavorites(article.id))}>
                                     {favorites.includes(article.id) ? (
-                                        <StarIcon sx={{ color: '#FE7139', width: '14px', margin: '0 2px' }} />
+                                        <StarIcon
+                                            sx={{ color: '#FE7139', width: '14px', margin: '0 2px', marginTop: '-2px' }}
+                                        />
                                     ) : (
-                                        <StarBorderIcon sx={{ width: '14px', margin: '0 2px' }} />
+                                        <StarBorderIcon sx={{ width: '14px', margin: '0 2px', marginTop: '-2px' }} />
                                     )}
                                     {favorites.includes(article.id) ? ` saved` : ` save`}
                                 </span>

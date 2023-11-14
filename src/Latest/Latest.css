@@ -15,7 +15,7 @@
 a { 
     color: var(--color-foreground);
     text-decoration: none;
-    font-family: 'Ubuntu Mono' san-serif;
+    font-family: 'Ubuntu Mono', san-serif;
     font-size: 18px;
     font-weight: 700;
     line-height: 18px;
@@ -25,13 +25,15 @@ a {
  .article-info {
     display: flex;
     align-items: center;
+    font-family:'Open Sans', sans-serif;
  }
  .article-domain {
     padding-left: 10px;
+    font-family:'Open Sans', sans-serif;
  }
  li {
     color: var(--color-secondary);
-    font-family: 'Ubuntu Mono' san-serif;
+    font-family: 'Ubuntu Mono', san-serif;
  }
  .save-button {
     display: flex;
